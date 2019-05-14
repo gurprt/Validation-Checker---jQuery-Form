@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Assinment - Online Activity</title>
+
+    <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+	
+        
+	<script>
+	$.validator.setDefaults({
+		submitHandler: function() {
+			alert("Your form become submitted!");
+		}
+	});
+
+	$().ready(function() {
+		// validate the comment form when it is submitted
+		$("#commentForm").validate();
+
+		// validate signup form on keyup and submit
+		$("#lab4").validate({
+			errorClass: "is-invalid",
+			
+			rules: {
+				
+				firstname: "required",
+				
+				lastname: "required",
+				
+				password: {
+					required: true,
+					minlength: 6
+                },
+				
+				confirm_password:{
+					equalTo: '#password',
+					required: true,
+					minlength: 6
+				},
+				
+				email: {
+					required: true,
+					gmailEmail: true
+				
+				},
+				
+				username:{
+					required: true,
+					minlength: 3
+					
+				},
+				
+			},
+			messages: {
+				firstname: "Please enter your First name",
+				lastname:"Please enter your lastname",
+				lastname:{
+					required:"Please enter your Last name",
+					minlength: "You username must consist of at least 2 characters"
+					},
+				password:{
+					required:"Please enter your Password",
+					minlength: "You Password must be atleast 6 characters long"
+					}, 
+				confirm_password: {
+					required:"Please enter your Confirm Password",
+					minlength: "You Password must be atleast 6 characters long",
+					equalTo: "You Password must match with your password"
+					}, 
+				
+			}
+		});
+
+		// propose username by combining first- and lastname
+		$("#username").focus(function() {
+			var firstname = $("#firstname").val();
+			var lastname = $("#lastname").val();
+			if (firstname && lastname && !this.value){
+				this.value = firstname + lastname;
+			}
+		});
+
+		// show when newsletter is checked
+		newsletter.click(function() {
+			topics[this.checked ? "removeClass" : "addClass"]("gray");
+			topicInputs.attr("disabled", !this.checked);
+		});
+	});
+	
+	jQuery.validator.addMethod("gmailEmail", function(value,element) {
+		return this.optional(element) || /^.+@gmail.com$/.test(value);
+	},"Only @gmail.com email addresses are allowed");
+	
+	</script>
+  </head>
+
+  
+  <body id="page-top">
+  <div class="container">
+  </br>
+    </br>
+
+	  <div class="card text-center">
+	<div class="jumbotron">
+	  <h2>Validation Checker</h2>
+	</div>
+
+
+		<form id="lab4" method="get" action="" class="needs-validation" novalidate=""> 
+
+<div class="container">
+	<div class="form-row">
+			 <div class="form-group col-md-6">
+				<input class="form-control"  placeholder="Firstname" aria-label="Firstname" id="firstname" name="firstname" type="text">
+			</div>
+
+			<div class="form-group col-md-6">
+				<input class="form-control" placeholder="Lastname" aria-label="Lastname" id="lastname" name="lastname" type="text">
+			</div>
+	</div>
+
+			 <div class="form-group">
+				<input class="form-control" placeholder="Username" aria-label="Username" id="username" name="username" type="text">
+			</div>
+			
+			<div class="form-group">
+				<input class="form-control" placeholder="Email" aria-label="Email" id="email" name="email" type="email">
+			</div>
+
+	<div class="form-row">
+			<div class="form-group col-md-6">
+				<input class="form-control" placeholder="Password" aria-label="Password" id="password" name="password" type="password">
+			</div>
+
+			<div class="form-group col-md-6">
+				<input class="form-control" placeholder="Confirm password" aria-label="Confirm password" id="confirm_password" name="confirm_password" type="password">
+			</div>
+	</div>
+
+			
+
+			<div class="card-footer">
+				<input  class="btn btn-primary btn-lg btn-block" type="submit" value="Submit">
+			</div>
+</div>
+
+		</form>
+	</div>
+</div>
+  </body>
+
+</html>
